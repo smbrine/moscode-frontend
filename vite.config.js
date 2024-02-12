@@ -1,15 +1,14 @@
 import {defineConfig, splitVendorChunkPlugin} from 'vite'
 import react from '@vitejs/plugin-react'
-// import viteCompression from 'vite-plugin-compression';
 import { compression } from 'vite-plugin-compression2'
 
-// https://vitejs.dev/config/
+
+
 export default defineConfig({
     plugins: [
         react(),
         splitVendorChunkPlugin(),
-        compression()
-        // viteCompression({algorithm: 'brotliCompress'})
+        compression({algorithm: 'brotliCompress'}),
     ],
     build: {
         rollupOptions: {
@@ -29,3 +28,4 @@ export default defineConfig({
         },
     },
 })
+
