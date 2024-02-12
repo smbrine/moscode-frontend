@@ -16,6 +16,7 @@ function App() {
         {
             location: '/',
             exactLocation: false,
+            element: <HomeView lang={lang} themeType={themeType}/>,
         },
         // {
         //     label: tabNames[1],
@@ -27,10 +28,12 @@ function App() {
         {
             location: "/contacts",
             exactLocation: false,
+            element: <ContactsView lang={lang} themeType={themeType}/>
         },
         {
             location: "/policy",
             exactLocation: false,
+            element: <PolicyView lang={lang} themeType={themeType}/>
         },
     ])
     const [langs, setLangs] = useState([])

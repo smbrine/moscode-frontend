@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
-import { Text } from "@geist-ui/core";
+import {Text} from "@geist-ui/core";
 import RequestForm from "../components/RequestForm.jsx";
 import ContactsList from "../components/ContactsList.jsx";
 import {sendContacts} from "../services/contactsService.js";
 
-const ContactsView = ({ lang, themeType }) => {
+const ContactsView = ({lang, themeType}) => {
     const [contacts, setContacts] = useState([
         {
             name: lang === 'en' ? "Daniil" : "Даниил",
@@ -43,21 +43,17 @@ const ContactsView = ({ lang, themeType }) => {
         ])
     }, [lang]);
 
-    async function handleSubmit(name, phone, message) {
-        await sendContacts(name, phone, message)
-    }
-
     return (
         <div style={{textAlign: "center"}}>
             <Text
                 h2
-                style={{fontSize: '36px' }}
+                style={{fontSize: '36px'}}
             >
                 {lang === 'en' ? 'Contacts' : 'Контакты'}</Text>
             <RequestForm
                 lang={lang}
                 setUserCredentials={setUserCredentials}
-                handleSubmit={handleSubmit}
+                handleSubmit={sendContacts}
 
             />
             <ContactsList
