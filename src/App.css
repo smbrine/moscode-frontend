@@ -1,9 +1,0 @@
-body, html {
-    min-width: 370px;
-}
-
-body, html{
-    min-width:370px;
-    width: auto !important;
-    width: 370px;
-}

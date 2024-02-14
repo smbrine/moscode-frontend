@@ -1,0 +1,10 @@
+.loadingPlaceholder {
+    margin: 0 auto;
+}
+
+.loadingPlaceholderWrapper {
+    max-width: max(80vw, 570px);
+    width: 100vw;
+    height: 20em;
+    margin: 0 auto;
+}

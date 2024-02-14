@@ -1,17 +1,20 @@
-import {CssBaseline, GeistProvider} from '@geist-ui/core';
-import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
+import {CssBaseline, GeistProvider, Loading, Spinner} from '@geist-ui/core';
+import {Navigate, Route, Routes} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import HomeView from "./views/HomeView.jsx";
-import CustomHeader from "./components/CustomHeader.jsx";
 import ContactsView from "./views/ContactsView.jsx";
 import {getTabNamesByLang} from "./services/localizationService.js";
-import './App.css'
-import PolicyView from "./views/PolicyView.jsx";
+import useLanguage from "./hooks/useLanguage.jsx";
+
+import CustomHeader from "./components/CustomHeader.jsx"
+import PolicyView from "./views/PolicyView.jsx"
+import HomeView from "./views/HomeView.jsx"
 
 function App() {
     const [themeType, setThemeType] = useState('dark');
-    const [lang, setLang] = useState("")
+    const [lang, setLang] = useLanguage("")
     const [tabNames, setTabNames] = useState(["Главная", "Портфолио", "Контакты"])
+
+
     const [tabs, setTabs] = useState([
         {
             location: '/',
@@ -45,7 +48,7 @@ function App() {
                 location: '/',
                 exactLocation: false,
                 showInMenu: true,
-                element: <HomeView lang={lang} themeType={themeType}/>,
+                element: <HomeView lang={lang} themeType={themeType}/>
             },
             // {
             //     label: tabNames[1],
@@ -109,20 +112,6 @@ function App() {
     }, []);
 
     useEffect(() => {
-        if (localStorage.getItem('preferredLang')) {
-            setLang(localStorage.getItem('preferredLang'))
-        } else {
-            switch (navigator.language) {
-                case "en-US":
-                    setLang("en")
-                    break;
-                default:
-                    setLang("ru")
-            }
-        }
-    }, [])
-
-    useEffect(() => {
         document.title = lang === 'en' ? 'MosCode studio' : 'МосКод - студия'
     }, [lang]);
 
@@ -131,7 +120,6 @@ function App() {
             themeType={themeType}
         >
             <CssBaseline/>
-            <Router>
                 <CustomHeader
                     tabs={tabs}
                     setLang={setLang}
@@ -139,13 +127,12 @@ function App() {
                     themeType={themeType}
                     lang={lang}
                 />
-                <Routes>
-                    {tabs.map((tab, key) => (
-                        <Route exact={tab.exactLocation} key={key} path={tab.location} element={tab.element}/>
-                    ))}
-                    <Route path='/*' element={<Navigate to={'/'}/>}/>
-                </Routes>
-            </Router>
+            <Routes>
+                {tabs.map((tab, key) => (
+                    <Route exact={tab.exactLocation} key={key} path={tab.location} element={tab.element}/>
+                ))}
+                <Route path='/*' element={<Navigate to={'/'}/>}/>
+            </Routes>
         </GeistProvider>
     )
 }

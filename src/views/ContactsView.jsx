@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 import {Text} from "@geist-ui/core";
 import RequestForm from "../components/RequestForm.jsx";
-import ContactsList from "../components/ContactsList.jsx";
+
+import ContactsList from "../components/ContactsList.jsx"
 import {sendContacts} from "../services/contactsService.js";
 
 const ContactsView = ({lang, themeType}) => {
@@ -54,14 +55,13 @@ const ContactsView = ({lang, themeType}) => {
                 lang={lang}
                 setUserCredentials={setUserCredentials}
                 handleSubmit={sendContacts}
-
             />
-            <ContactsList
-                lang={lang}
-                themeType={themeType}
-                listOfContacts={contacts}
-                style={{width: '90vw', margin: '16px auto', maxWidth: '660px', minWidth: '370px'}}
-            />
+                <ContactsList
+                    lang={lang}
+                    themeType={themeType}
+                    listOfContacts={contacts}
+                    style={{width: '90vw', margin: '16px auto', maxWidth: '660px', minWidth: '370px'}}
+                />
         </div>
     );
 };

@@ -1,9 +1,5 @@
 import {Text} from "@geist-ui/core";
 
-
-const screenWidth = () => {
-    return window.innerWidth / 100
-}
 const PortfolioView = ({lang}) => {
     return (
         <div style={{textAlign: "center"}}>
@@ -12,7 +8,7 @@ const PortfolioView = ({lang}) => {
             >
                 {lang === 'en' ? 'Portfolio' : 'Портфолио'}
             </Text>
-            <Text style={{margin: `0 auto`, maxWidth: `${Math.min(screenWidth()*80, 570)}px`, textAlign: 'left'}}>
+            <Text style={{margin: `0 auto`, maxWidth: `min(80vw, 570px)`, textAlign: 'left'}}>
                 Bacon ipsum dolor amet biltong cupim landjaeger pork belly chicken, cow doner shankle prosciutto. Kevin salami beef burgdoggen boudin tail ribeye hamburger fatback. Short loin tongue t-bone pork loin landjaeger porchetta. Beef ribs pork belly tail jerky ground round kielbasa pork chop turkey shankle sirloin corned beef sausage biltong rump.
 
                 Hamburger tail salami spare ribs filet mignon chicken. Spare ribs t-bone buffalo cow sausage turducken ham boudin. Andouille prosciutto bresaola hamburger tenderloin landjaeger buffalo leberkas shankle. Strip steak fatback alcatra shoulder pork belly filet mignon tail boudin bacon bresaola tri-tip.

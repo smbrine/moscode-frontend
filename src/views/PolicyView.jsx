@@ -1,12 +1,13 @@
-import React from 'react';
 import {Link, Text} from "@geist-ui/core";
+import cls from './PolicyView.module.css'
 
 const PolicyView = ({lang, themeType}) => {
+
     return (
-        <div style={{width: '90vw', maxWidth: '1200px', margin: 'auto'}}>
-            <Text h1 style={{textAlign: "center"}}>Политика в отношении<br/>обработки персональных данных</Text>
+        <div className={cls.policyWrapper}>
+            <Text h1 className={cls.policyHeader}>Политика в отношении<br/>обработки персональных данных</Text>
             <section>
-                <Text h2>1. Общие положения</Text>
+                <Text h2 className={cls.paragraphHeader}>1. Общие положения</Text>
                 <Text p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями
                     Федерального закона от 27.07.2006.
                     № 152-ФЗ «О персональных данных» (далее — Закон о персональных данных) и определяет порядок
@@ -23,7 +24,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>2. Основные понятия, используемые в Политике</Text>
+                <Text h2 className={cls.paragraphHeader}>2. Основные понятия, используемые в Политике</Text>
                 <Text p>
                     2.1. Автоматизированная обработка персональных данных — обработка персональных данных с помощью
                     средств вычислительной техники.
@@ -102,7 +103,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     3. Основные права и обязанности Оператора
                 </Text>
                 <Text p>
@@ -141,7 +142,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     4. Основные права и обязанности субъектов персональных данных
                 </Text>
                 <Text p>
@@ -176,7 +177,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     5. Принципы обработки персональных данных
                 </Text>
                 <Text p>
@@ -216,7 +217,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     6. Цели обработки персональных данных
                 </Text>
                 <Text p>
@@ -256,7 +257,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     7. Условия обработки персональных данных
                 </Text>
                 <Text p>
@@ -295,7 +296,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     8. Порядок сбора, хранения, передачи и других видов обработки персональных данных
                 </Text>
                 <Text p>
@@ -355,7 +356,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     9. Перечень действий, производимых Оператором с полученными персональными данными
                 </Text>
                 <Text p>
@@ -369,7 +370,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     10. Трансграничная передача персональных данных
                 </Text>
                 <Text p>
@@ -385,7 +386,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     11. Конфиденциальность персональных данных
                 </Text>
                 <Text p>
@@ -395,7 +396,7 @@ const PolicyView = ({lang, themeType}) => {
                 </Text>
             </section>
             <section>
-                <Text h2>
+                <Text h2 className={cls.paragraphHeader}>
                     12. Заключительные положения
                 </Text>
                 <Text p>

@@ -1,0 +1,9 @@
+{
+  "name": "МосКод -— компания, специализирующаяся на разработrе сайтов и мобильных приложений.",
+  "short_name": "МосКод",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/"
+}

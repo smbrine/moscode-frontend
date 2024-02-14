@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Checkbox, Input, Link, Text, useToasts} from "@geist-ui/core";
 import {Phone} from "@geist-ui/icons";
+import cls from './RequestForm.module.css'
 
 function isEmailFieldValid(value) {
     const symbolsEmailRegex = /^[-+_.@a-zA-Z0-9]+$/;
@@ -254,9 +255,9 @@ const RequestForm = ({
         }
     }
 
-    return (
-        <form style={{display: "grid", width: "90vw", maxWidth: "280px", margin: "0 auto", minWidth: '280px'}}>
-            <Text h3 style={{fontSize: '24px'}}>{lang === 'en' ? 'Learn more' : 'Узнать больше'}</Text>
+    return (<>
+        <label htmlFor={'clientForm'}><Text h3 className={cls.formHeader} >{lang === 'en' ? 'Learn more' : 'Узнать больше'}</Text></label>
+        <form className={cls.requestForm} id={'clientForm'}>
             <Input
                 scale={2}
                 clearable
@@ -265,12 +266,11 @@ const RequestForm = ({
                 placeholder={lang === 'en' ? 'Name...' : 'Имя...'}
                 value={name}
                 onChange={handleNameChange}
-                style={{zIndex: 1}}
                 type={nameError ? 'error' : 'secondary'}
                 inputMode={'text'}
                 onClearClick={handleNameClear}
                 autoComplete={'name'}
-                autoCapitalize
+                autoCapitalize={'words'}
             />
             <Input
                 scale={2}
@@ -313,7 +313,7 @@ const RequestForm = ({
             />
             <Button
                 icon={<Phone/>}
-                style={{width: '75%', margin: "0 auto"}}
+                className={cls.submitButton}
                 type="secondary"
                 onClick={handleFormSubmit}
                 htmlType={'submit'}
@@ -330,10 +330,7 @@ const RequestForm = ({
                     lang === 'en'
                         ? <Text p
                                 type={legalError ? 'error' : 'default'}
-                                style={{
-                                    fontSize: '12px',
-                                    // width: '150%',
-                                }}
+                                className={cls.policyConsentText}
                                 margin={0}
                                 padding={0}
                         >
@@ -341,10 +338,7 @@ const RequestForm = ({
                         </Text>
                         : <Text p
                                 type={legalError ? 'error' : 'default'}
-                                style={{
-                                    fontSize: '12px',
-                                    // width: '150%',
-                                }}
+                                className={cls.policyConsentText}
                                 margin={0}
                                 padding={0}
                         >
@@ -353,6 +347,7 @@ const RequestForm = ({
                 }
             </Checkbox>
         </form>
+        </>
     );
 };
 

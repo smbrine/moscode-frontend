@@ -1,0 +1,9 @@
+.homeTextHeader {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.homeText {
+    margin: 0 auto;
+    max-width: min(80vw, 570px)
+}

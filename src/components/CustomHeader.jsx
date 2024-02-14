@@ -1,58 +1,75 @@
-import React, {useEffect, useState} from 'react';
-import {Link, Select, Tabs, Text} from "@geist-ui/core";
-import {Navigate} from "react-router-dom";
+import {useEffect, useState} from 'react';
+import {Select, Tabs, Text} from "@geist-ui/core";
+import {Link, useLocation, useNavigate} from 'react-router-dom'
+import cls from './CustomHeader.module.css'
 
 function itoa(i) {
     return i.toString()
 }
 
-const getValueFromHref = (arr) => {
-    let ind = arr.findIndex(obj => obj.location === window.location.pathname)
+const getValueFromHref = (arr, pathname) => {
+    let ind = arr.findIndex(obj => obj.location === pathname)
     return itoa(ind === -1 ? 0 : ind);
 }
 
 
 const CustomHeader = ({tabs, setLang, langs, themeType, lang}) => {
-    const [isWide, setIsWide] = useState(window.innerWidth > 615);
-    const [isWideEnough, setIsWideEnough] = useState(window.innerWidth > 800);
+    const [screenWidth, setScreenWidth] = useState(0)
+    const [isWide, setIsWide] = useState(false);
+    const [isWideEnough, setIsWideEnough] = useState(false);
+    const [tabsValue, setTabsValue] = useState(0)
+    const currentLocation = useLocation()
+    const navigate = useNavigate()
 
     useEffect(() => {
+        setScreenWidth(window.innerWidth)
+        setIsWide(screenWidth > 615)
+        setIsWideEnough(screenWidth > 800)
         const handleResize = () => {
-            setIsWide(window.innerWidth > 615);
-            setIsWideEnough(window.innerWidth > 800);
+            setScreenWidth(window.innerWidth)
+            setIsWide(screenWidth > 615);
+            setIsWideEnough(screenWidth > 800)
         };
 
         window.addEventListener('resize', handleResize);
 
         // Clean up the event listener on component unmount
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [screenWidth]);
+
+    useEffect(() => {
+        setTabsValue(getValueFromHref(tabs, currentLocation.pathname))
+    }, [tabs, currentLocation.pathname]);
 
     const handleLangSwitch = (lng) => {
         setLang(lng)
-        localStorage.setItem('preferredLang', lng)
+    }
+
+    function handleLogoClick(e) {
+        e.preventDefault()
+        navigate('/')
+    }
+
+    function handleNavChange(e) {
+        return navigate(tabs[e].location)
     }
 
     return (
-        <header style={{height: "80px", display: "flex", width: "100vw", minWidth: '370px'}}>
+        <header className={cls.wrapper}>
             <Link
-                href={"/"}
-                style={{
-                    marginLeft: "16px", marginTop: "8px"
-                }}
+                to={"/"}
+                onClick={handleLogoClick}
+                className={cls.logoLink}
             >
                 <img
-                    alt={''}
+                    alt={'logo'}
                     src={themeType === 'light' ? '/logo_light.png' : '/logo_dark.png'}
-                    style={{
-                        height: "64px", width: "64px",
-                        padding: 0,
-                        minWidth: '64px'
-                    }}
+                    className={cls.logoImg}
                 />
             </Link>
             <Tabs
-                initialValue={getValueFromHref(tabs)}
+                initialValue={getValueFromHref(tabs, currentLocation.pathname)}
+                value={tabsValue}
                 marginTop={"16px"}
                 marginLeft={"0px"}
                 marginRight={"8px"}
@@ -61,6 +78,7 @@ const CustomHeader = ({tabs, setLang, langs, themeType, lang}) => {
                     minWidth: "150px",
                     // maxWidth: "300px"
                 }}
+                onChange={handleNavChange}
             >
                 {tabs.map((tab, key) => (
                     tab.showInMenu
@@ -69,7 +87,6 @@ const CustomHeader = ({tabs, setLang, langs, themeType, lang}) => {
                             value={itoa(key)}
                             key={key}
                         >
-                            <Navigate to={tab.location}/>
                         </Tabs.Item>
                         : null
                 ))}
@@ -78,30 +95,21 @@ const CustomHeader = ({tabs, setLang, langs, themeType, lang}) => {
                 isWide
                     ? isWideEnough
                         ? (lang === 'en'
-                                ? <Text h1 style={{
-                                    textAlign: "center",
-                                    position: 'absolute',
-                                    left: '50%',
-                                    transform: 'translateX(-50%)', // Updated for both horizontal and vertical centering
-                                    margin: '0 auto'
-                                }}>MosCode</Text>
-                                : <Text h1 style={{
-                                    textAlign: "center",
-                                    position: 'absolute',
-                                    left: '50%',
-                                    transform: 'translateX(-50%)', // Updated for both horizontal and vertical centering
-                                    margin: '0 auto'
-                                }}>МосКод</Text>
+                                ? <Text h1 className={cls.headerWideEnough}>MosCode</Text>
+                                : <Text h1 className={cls.headerWideEnough}>МосКод</Text>
                         )
                         :
                         (lang === 'en'
-                                ? <Text h1 style={{ textAlign: "center", margin: '0 auto', }}>MosCode</Text>
-                                : <Text h1 style={{ textAlign: "center", margin: '0 auto', }}>МосКод</Text>
+                                ? <Text h1 className={cls.headerWide}>MosCode</Text>
+                                : <Text h1 className={cls.headerWide}>МосКод</Text>
                         )
                     : null
             }
             <Select
-                initialValue={localStorage.getItem('preferredLang') || lang || "en"}
+                initialValue={
+                    lang
+                }
+                value={lang}
                 onChange={handleLangSwitch}
                 marginLeft={"auto"}
                 marginTop={"22px"}

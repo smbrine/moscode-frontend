@@ -1,4 +1,5 @@
 import {Text, User} from "@geist-ui/core";
+import cls from './ContactsList.module.css'
 
 const ContactsList = ({lang, themeType, listOfContacts, style}) => {
     return (
@@ -7,13 +8,12 @@ const ContactsList = ({lang, themeType, listOfContacts, style}) => {
                 <User
                     src={contact.image}
                     name={contact.name}
+                    className={cls.userTile}
                     style={{
+                        border: themeType === 'dark' ? '1px solid white' : '1px solid black',
                         margin: '8px 0 0 8px',
                         padding: '8px 0 8px 8px',
-                        minWidth: "150px",
-                        border: themeType === 'dark' ? '1px solid white' : '1px solid black',
-                        borderRadius: '8px',
-                        width: '40%'
+                        width: '40%',
                     }}
                     key={key}
                     altText={'profile-pic'}
